@@ -1,0 +1,104 @@
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  background: #f1f1f1;
+  justify-content: space-between;
+  align-items: center;
+
+  & button {
+    min-width: 6rem;
+  }
+
+  .experiment {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+}
+
+.progress {
+  box-sizing: border-box;    
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 100%;
+  
+}
+
+
+
+.start {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+.container {
+  
+  padding: 2rem 2rem 2rem 2rem;
+  
+  
+}
+
+.continue {
+  background:#207fe8;
+  color: white;
+  width: 200px;
+  font-size: 16px;
+    line-height: 47px;
+}
+
+.headline {  
+  margin-bottom: 2rem;
+}
+
+.x-small {
+  max-width: 576px;
+}
+
+.small {
+  max-width: 576px;
+}
+
+.medium {
+  max-width: 768px;
+}
+
+.large {
+  max-width: 992px;
+}
+
+
+.col-1 {
+  display:grid;
+  grid-template-columns: 1fr;
+}
+
+.col-2 {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+
+  &.ratio-1-2 {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.col-3 {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.cell-50 {
+  max-width: 50%;
+}
+
+.cell-33 {
+  max-width: 33.33%;
+}
+
+.cell-50 {
+  max-width: 50%;
+}

@@ -1,0 +1,48 @@
+<header>
+	<div class="experiment">{{currentExperiment  | slice:0:6}}</div>
+	<div class="progress">
+		<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+	</div>
+	<button mat-stroked-button color="primary" (click)="reset()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</header>
+
+<div class="container medium">
+
+	<div class="start" *ngIf="!started">
+		<button mat-raised-button (click)="start()">Start <mat-icon>play_arrow</mat-icon></button>
+
+	</div>
+
+	<ng-container *ngIf="started">
+		<form class="form">
+			<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
+				<ng-container *ngFor="let form of forms; let formIndex = index">
+					<mat-tab [label]="form.label">
+						<div class="container">
+							<div class="headline">
+								<h1>{{form.title}}</h1>
+								<p>{{form.description}}</p>
+							</div>
+							<ng-container *ngFor="let fieldGroup of form.fieldGroups; let groupIndex = index">
+								<div [class]="fieldGroup.classes">
+									<ng-container *ngFor="let field of fieldGroup.fields">
+										<mat-form-field [class]="field.classes" [appearance]="field.appearance">
+											<mat-label>{{field.label}}</mat-label>											
+											<input matInput [placeholder]="field.placeholder" (input)="field.value = $event.target.value" [value]="field.value">
+                    </mat-form-field>
+									</ng-container>
+								</div>
+							</ng-container>
+							<button class="continue" mat-flat-button (click)="continue(formIndex)">
+                Continue
+              </button>
+						</div>
+					</mat-tab>
+				</ng-container>
+			</mat-tab-group>
+		</form>
+	</ng-container>
+
+</div>
