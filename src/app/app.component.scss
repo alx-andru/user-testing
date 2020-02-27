@@ -1,8 +1,19 @@
+:host {
+  margin: 0 auto;
+  display: flex;
+  flex-direction:column;
+    
+  align-items:center;
+  max-width: 100%;
 
+}
 header {
+  box-sizing: border-box;
+  width: 100%;
   display: flex;
   flex-direction: row;
   padding: 1rem;
+  
   background: #f1f1f1;
   justify-content: space-between;
   align-items: center;
@@ -31,15 +42,25 @@ header {
 
 .start {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  
+
+  font-size: 1.2rem;
+  p {
+    margin:0;
+    margin-bottom: 0.5rem;
+    line-height: 1.8rem;
+  }
 }
 
 .container {
+  padding: 2rem;
+}
+
+.container-form {
   
-  padding: 2rem 2rem 2rem 2rem;
   
+  width: 600px;
   
 }
 
@@ -64,6 +85,7 @@ header {
 }
 
 .medium {
+  
   max-width: 768px;
 }
 
@@ -71,6 +93,9 @@ header {
   max-width: 992px;
 }
 
+.col {
+  grid-gap: 10px;
+}
 
 .col-1 {
   display:grid;
@@ -80,9 +105,14 @@ header {
 .col-2 {
   display:grid;
   grid-template-columns: 1fr 1fr;
+  
 
   &.ratio-1-2 {
     grid-template-columns: 1fr 2fr;
+  }
+  
+  &.ratio-2-1 {
+    grid-template-columns: 2fr 1fr;
   }
 }
 
@@ -101,4 +131,8 @@ header {
 
 .cell-50 {
   max-width: 50%;
+}
+
+.cell-75 {
+  max-width: 75%;
 }

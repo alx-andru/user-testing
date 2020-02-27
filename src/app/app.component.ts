@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -12,13 +12,17 @@ import * as firebase from "firebase";
 export interface Experiment {
   name: string;
   startTime?: firebase.firestore.FieldValue;
+  stopTimer0?: firebase.firestore.FieldValue;
+  stopTimer1?: firebase.firestore.FieldValue;
+  stopTimer2?: firebase.firestore.FieldValue;
+  stopTimer3?: firebase.firestore.FieldValue;
+  stopTimer4?: firebase.firestore.FieldValue;
+  stopTimer5?: firebase.firestore.FieldValue;
   endTime?: firebase.firestore.FieldValue;
   forms?: Form[];
 }
 
 export interface Form {
-  startTime: firebase.firestore.FieldValue;
-  endTime: firebase.firestore.FieldValue;
   label?: string;
   title?: string;
   description?: string;
@@ -31,6 +35,10 @@ export interface Form {
       value?: any;
       label?: string;
       index?: number;
+      iconRight?: string;
+      iconLeft?: string;
+      inputType?: string;
+      required?: boolean;
     }[];
   }[];
 }
@@ -40,53 +48,86 @@ export interface Form {
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
-  forms = [
+export class AppComponent implements OnInit {
+  forms: Form[] = [
     {
       label: "A",
-      title: "Where are you staying?",
+      title: "Where do you live?",
       description:
-        "Provide details of your first accommodation (for example, hotel or host).",
+        "Provide your permanent home address. Please do not enter a temporary address.",
       fieldGroups: [
         {
-          classes: "col-2 ratio-1-2",
+          classes: "col col-2",
           fields: [
             {
               appearance: "outline",
               classes: "cell-50",
-              placeholder: "street",
+              placeholder: "Apartment #",
               value: null,
-              label: "Street",
+              label: "Apartment #",
+
+              index: 0
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Address Line 1",
+              value: null,
+              label: "Address Line 1",
+              required: true,
               index: 0
             },
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street 2",
+              placeholder: "Address Line 2",
               value: null,
-              label: "Street 2",
+              label: "Address Line 2",
               index: 1
             }
           ]
         },
         {
-          classes: "col-1",
+          classes: "col col-2",
           fields: [
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street",
+              placeholder: "City",
               value: null,
-              label: "Street",
+              label: "City",
+              required: true,
               index: 0
             },
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street 2",
+              placeholder: "State/Provice/Region",
               value: null,
-              label: "Street 2",
+              label: "State/Provice/Region",
+              required: true,
               index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "cell-75",
+              placeholder: "Phone Number",
+              value: null,
+              label: "Phone Number",
+              iconRight: "phone",
+              required: true,
+              index: 0,
+              inputType: "number"
             }
           ]
         }
@@ -94,70 +135,258 @@ export class AppComponent {
     },
     {
       label: "B",
-      title: "Where are you staying?",
+      title: "Where do you live?",
       description:
-        "Provide details of your first accommodation (for example, hotel or host).",
+        "Provide your permanent home address. Please do not enter a temporary address.",
+
       fieldGroups: [
         {
-          classes: "col-2 ratio-1-2",
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Street Number",
+              value: null,
+              label: "Street Number",
+              index: 0
+            },
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Address Line 1",
+              required: true,
+              value: null,
+              label: "Address Line 1",
+              index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Address Line 2",
+              required: true,
+              value: null,
+              label: "Address Line 2",
+              index: 0
+            },
+            {
+              appearance: "outline",
+              classes: "cell-75",
+              placeholder: "Apartment Number",
+              value: null,
+              label: "Apartment Number",
+              index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "City",
+              required:true,
+              value: null,
+              label: "City",
+              index: 0
+            },
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "State/Province/Region",
+              required:true,
+              value: null,
+              label: "State/Province/Region",
+              index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-1",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Phone Number",
+              required:true,
+              value: null,
+              label: "Phone Number",
+              iconRight: "phone",
+              index: 0,
+              inputType: "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: "C",
+      title: "Where do you live?",
+      description:
+        "Provide your permanent home address. Please do not enter a temporary address.",
+
+      fieldGroups: [
+        {
+          classes: "col col-2",
           fields: [
             {
               appearance: "outline",
               classes: "cell-50",
-              placeholder: "street",
+              placeholder: "Apartment #",
               value: null,
-              label: "Street",
-              index: 0
-            },
-            {
-              appearance: "outline",
-              classes: "",
-              placeholder: "street 2",
-              value: null,
-              label: "Street 2",
+              label: "Apartment #",
               index: 1
             }
           ]
         },
         {
-          classes: "col-1",
+          classes: "col col-2",
           fields: [
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street",
+              placeholder: "Address Line 1",
               value: null,
-              label: "Street",
+              required:true,
+              label: "Address Line 1",
               index: 0
             },
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street 2",
+              placeholder: "Address Line 2",
               value: null,
-              label: "Street 2",
+              label: "Address Line 2",
               index: 1
             }
           ]
         },
         {
-          classes: "col-1",
+          classes: "col col-2",
           fields: [
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street",
+              placeholder: "City",
+              required:true,
               value: null,
-              label: "Street",
+              label: "City",
               index: 0
             },
             {
               appearance: "outline",
               classes: "",
-              placeholder: "street 2",
+              placeholder: "State/Province/Region",
               value: null,
-              label: "Street 2",
+              required:true,
+              label: "State/Province/Region",
               index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "cell-75",
+              placeholder: "Phone Number",
+              value: null,
+              label: "Phone Number",
+              required:true,
+              iconRight: "phone",
+              index: 0,
+              inputType: "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: "D",
+      title: "Where do you live?",
+      description:
+        "Provide your permanent home address. Please do not enter a temporary address.",
+
+      fieldGroups: [
+        {
+          classes: "col col-2 ratio-2-1",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Streetname, street number or P.O. Box",
+              value: null,
+              label: "Address Line 1",
+              index: 0,
+              required:true
+
+            },
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Apartment or unit number",
+              value: null,
+              label: "Apartment number",
+              index: 1
+            }
+          ]
+        },
+        {
+          classes: "col col-1",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "Additional address line",
+              value: null,
+              label: "Address Line 2",
+              index: 0
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "State, province or region as applicable",
+              value: null,
+              required:true,
+              label: "State/Province/Region",
+              index: 1
+            },
+            {
+              appearance: "outline",
+              classes: "",
+              required:true,
+              placeholder: "City",
+              value: null,
+              label: "City",
+              index: 0
+            }
+          ]
+        },
+        {
+          classes: "col col-2",
+          fields: [
+            {
+              appearance: "outline",
+              classes: "cell-75",
+              placeholder: "Phone Number",
+              value: null,
+              required:true,
+              label: "Phone Number",
+              iconRight: "phone",
+              index: 0,
+              inputType: "number"
             }
           ]
         }
@@ -169,55 +398,92 @@ export class AppComponent {
 
   progress = 0;
   appearance = "outline";
-  started = true;
+  started = false;
   currentExperiment = "";
   selectedIndex = 0;
 
-  constructor(private afs: AngularFirestore) {
-    firebase.auth().signInAnonymously();
-  }
+  constructor(private afs: AngularFirestore) {}
 
-  update(item: Experiment) {
-    this.itemDoc.update({});
+  async ngOnInit() {
+    await firebase.auth().signInAnonymously();
+    this.reset();
   }
 
   start() {
     this.started = true;
     this.selectedIndex = 0;
     this.updateProgress();
+    this.itemDoc.update({
+      startTime: firebase.firestore.FieldValue.serverTimestamp()
+    });
   }
 
   async reset() {
     this.selectedIndex = -1;
     this.started = false;
-    firebase.auth().signOut();
-    firebase.auth().signInAnonymously();
+    await firebase.auth().signOut();
+    await firebase.auth().signInAnonymously();
 
     this.currentExperiment = firebase.auth().currentUser.uid;
     this.started = false;
     console.log("new experiment", this.currentExperiment);
 
-    this.itemDoc = this.afs.doc<any>(`experiments/test`);
-    await this.itemDoc.update({
-      name: "test"
-    });
+    this.itemDoc = this.afs.doc<Experiment>(
+      `experiments/${this.currentExperiment}`
+    );
 
+    await this.itemDoc.set({
+      name: this.currentExperiment
+    });
+    this.updateProgress();
     this.selectedIndex = -1;
+    this.forms.forEach(form => {
+      form.fieldGroups.forEach(fieldGroup => {
+        fieldGroup.fields.forEach(field => {
+          field.value = null;
+        });
+      });
+    });
   }
 
   continue(formIndex: number) {
     console.log({ formIndex });
     console.log(this.forms);
 
-    if (formIndex + 1 === this.forms.length) {
+    const nextIndex = formIndex + 1;
+    const reset = nextIndex === this.forms.length;
+
+    // this.forms[0].endTime = firebase.firestore.FieldValue.serverTimestamp();
+    if (!reset) {
+      // this.forms[
+      //   nextIndex
+      // ].startTime = firebase.firestore.FieldValue.serverTimestamp();
+    }
+
+    const exp: Experiment = {
+      name: this.currentExperiment,
+      forms: this.forms
+    };
+
+    exp[
+      `stopTimer${formIndex}`
+    ] = firebase.firestore.FieldValue.serverTimestamp();
+
+    if (nextIndex === this.forms.length) {
+      exp.endTime = firebase.firestore.FieldValue.serverTimestamp();
+      this.itemDoc.update(exp);
       this.reset();
     } else {
+      this.itemDoc.update(exp);
       this.selectedIndex = formIndex + 1;
     }
-    this.updateProgress();
+
     // take form field
     // update
+
     // go to next form
+
+    this.updateProgress();
   }
 
   updateProgress() {

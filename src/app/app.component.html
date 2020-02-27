@@ -11,7 +11,16 @@
 <div class="container medium">
 
 	<div class="start" *ngIf="!started">
-		<button mat-raised-button (click)="start()">Start <mat-icon>play_arrow</mat-icon></button>
+		<p>Imagine you are a traveller who just bought plane tickets for a holiday and require a visa to go to your
+			destination. During the application you are asked to provide your address.<p>
+				<p> Recall an address you are familiar with. You will be asked to enter it in a few times on different
+					pages.
+				</p>
+				<p>
+					When you are ready, click the start button.
+				</p>
+				<br><br><br><br>
+				<button mat-raised-button (click)="start()">Start <mat-icon>play_arrow</mat-icon></button>
 
 	</div>
 
@@ -20,7 +29,7 @@
 			<mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
 				<ng-container *ngFor="let form of forms; let formIndex = index">
 					<mat-tab [label]="form.label">
-						<div class="container">
+						<div class="container-form">
 							<div class="headline">
 								<h1>{{form.title}}</h1>
 								<p>{{form.description}}</p>
@@ -29,9 +38,16 @@
 								<div [class]="fieldGroup.classes">
 									<ng-container *ngFor="let field of fieldGroup.fields">
 										<mat-form-field [class]="field.classes" [appearance]="field.appearance">
-											<mat-label>{{field.label}}</mat-label>											
-											<input matInput [placeholder]="field.placeholder" (input)="field.value = $event.target.value" [value]="field.value">
-                    </mat-form-field>
+											<mat-label>{{field.label}}</mat-label>
+											<mat-icon matPrefix *ngIf="field.iconLeft">{{field.iconLeft}}</mat-icon>
+											<input matInput
+                        [type]="field.inputType"
+                        [placeholder]="field.placeholder"
+                        (input)="field.value = $event.target.value"
+                        [value]="field.value" 
+                        [required]="field.required">
+											<mat-icon matSuffix *ngIf="field.iconRight">{{field.iconRight}}</mat-icon>
+										</mat-form-field>
 									</ng-container>
 								</div>
 							</ng-container>
