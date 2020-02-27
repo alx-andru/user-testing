@@ -169,7 +169,7 @@ export class AppComponent implements OnInit {
               appearance: "outline",
               classes: "",
               placeholder: "Address Line 2",
-              required: true,
+              required: false,
               value: null,
               label: "Address Line 2",
               index: 0
