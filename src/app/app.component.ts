@@ -116,9 +116,6 @@ export class AppComponent implements OnInit {
           ]
         },
         {
-          classes: "row"
-        },
-        {
           classes: "col col-2",
           fields: [
             {
@@ -210,9 +207,7 @@ export class AppComponent implements OnInit {
             }
           ]
         },
-        {
-          classes: "row"
-        },
+       
         {
           classes: "col col-1",
           fields: [
@@ -382,9 +377,7 @@ export class AppComponent implements OnInit {
             }
           ]
         },
-        {
-          classes: "row"
-        },
+       
         {
           classes: "col col-2",
           fields: [
