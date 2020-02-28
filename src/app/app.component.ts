@@ -107,13 +107,16 @@ export class AppComponent implements OnInit {
             {
               appearance: "outline",
               classes: "",
-              placeholder: "State/Provice/Region",
+              placeholder: "State/Province/Region",
               value: null,
-              label: "State/Provice/Region",
+              label: "State/Province/Region",
               required: true,
               index: 1
             }
           ]
+        },
+        {
+          classes: "row"
         },
         {
           classes: "col col-2",
@@ -191,7 +194,7 @@ export class AppComponent implements OnInit {
               appearance: "outline",
               classes: "",
               placeholder: "City",
-              required:true,
+              required: true,
               value: null,
               label: "City",
               index: 0
@@ -200,12 +203,15 @@ export class AppComponent implements OnInit {
               appearance: "outline",
               classes: "",
               placeholder: "State/Province/Region",
-              required:true,
+              required: true,
               value: null,
               label: "State/Province/Region",
               index: 1
             }
           ]
+        },
+        {
+          classes: "row"
         },
         {
           classes: "col col-1",
@@ -214,7 +220,7 @@ export class AppComponent implements OnInit {
               appearance: "outline",
               classes: "",
               placeholder: "Phone Number",
-              required:true,
+              required: true,
               value: null,
               label: "Phone Number",
               iconRight: "phone",
@@ -253,7 +259,7 @@ export class AppComponent implements OnInit {
               classes: "",
               placeholder: "Address Line 1",
               value: null,
-              required:true,
+              required: true,
               label: "Address Line 1",
               index: 0
             },
@@ -274,7 +280,7 @@ export class AppComponent implements OnInit {
               appearance: "outline",
               classes: "",
               placeholder: "City",
-              required:true,
+              required: true,
               value: null,
               label: "City",
               index: 0
@@ -284,11 +290,14 @@ export class AppComponent implements OnInit {
               classes: "",
               placeholder: "State/Province/Region",
               value: null,
-              required:true,
+              required: true,
               label: "State/Province/Region",
               index: 1
             }
           ]
+        },
+        {
+          classes: "row"
         },
         {
           classes: "col col-2",
@@ -299,7 +308,7 @@ export class AppComponent implements OnInit {
               placeholder: "Phone Number",
               value: null,
               label: "Phone Number",
-              required:true,
+              required: true,
               iconRight: "phone",
               index: 0,
               inputType: "number"
@@ -325,8 +334,7 @@ export class AppComponent implements OnInit {
               value: null,
               label: "Address Line 1",
               index: 0,
-              required:true
-
+              required: true
             },
             {
               appearance: "outline",
@@ -357,22 +365,25 @@ export class AppComponent implements OnInit {
             {
               appearance: "outline",
               classes: "",
-              placeholder: "State, province or region as applicable",
-              value: null,
-              required:true,
-              label: "State/Province/Region",
-              index: 1
-            },
-            {
-              appearance: "outline",
-              classes: "",
-              required:true,
+              required: true,
               placeholder: "City",
               value: null,
               label: "City",
               index: 0
+            },
+            {
+              appearance: "outline",
+              classes: "",
+              placeholder: "State, province or region as applicable",
+              value: null,
+              required: true,
+              label: "State/Province/Region",
+              index: 1
             }
           ]
+        },
+        {
+          classes: "row"
         },
         {
           classes: "col col-2",
@@ -382,7 +393,7 @@ export class AppComponent implements OnInit {
               classes: "cell-75",
               placeholder: "Phone Number",
               value: null,
-              required:true,
+              required: true,
               label: "Phone Number",
               iconRight: "phone",
               index: 0,
